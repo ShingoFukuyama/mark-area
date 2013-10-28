@@ -3,7 +3,7 @@ This programs' mark has no entity but visible.
 You can delete marks with DEL key.
 And when two marks exist, `mark-area-at-point` delete those marks. 
 
-[20 seconds Youtube live coding](http://www.youtube.com/watch?v=OGXHUBiwy14?rel=0)
+[20 seconds Youtube live coding](http://www.youtube.com/embed/OGXHUBiwy14?rel=0)
 
 ### Setting
 
