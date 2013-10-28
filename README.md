@@ -24,15 +24,15 @@ Apply mark-area.el to quickrun.el like below.
   (interactive)
   (mark-area-set-local-variable)
   (cond
-   ;; C-u M-x quickrun-ad-hoc with region
+   ;; C-u M-x quickrun-mark-area-ad-hoc with region
    ((and mark-active current-prefix-arg)
     (deactivate-mark)
     (quickrun-replace-region (region-beginning) (region-end)))
-   ;; M-x quickrun-ad-hoc with region
+   ;; M-x quickrun-mark-area-ad-hoc with region
    (mark-active
     (deactivate-mark)
     (quickrun :start (region-beginning) :end (region-end)))
-   ;; M-x quickrun-ad-hoc with specified area
+   ;; M-x quickrun-mark-area-ad-hoc with specified area
    ((and (overlay-start mark-area-beg-overlay)
          (overlay-start mark-area-end-overlay))
     (quickrun :start (overlay-start mark-area-beg-overlay)
