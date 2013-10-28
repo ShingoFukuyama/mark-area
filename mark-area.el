@@ -1,4 +1,4 @@
-;;; mark-area.el --- Mark two point and provide these position to ather elisp -*- coding: utf-8; lexical-binding: t -*-
+;;; mark-area.el --- Mark two points and provide these position to ather elisp -*- coding: utf-8; lexical-binding: t -*-
 
 ;; Copyright (C) 2013 by Shingo Fukuyama
 

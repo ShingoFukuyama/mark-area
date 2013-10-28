@@ -1,4 +1,4 @@
-Mark two point and provide these position to ather elisp.
+Mark two points and provide these position to ather elisp.
 This programs' mark has no entity but visible.
 You can delete marks with DEL key.
 And when two marks exist, `mark-area-at-point` delete those marks. 
