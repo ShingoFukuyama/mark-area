@@ -17,6 +17,7 @@ And when two marks exist, `mark-area-at-point` delete those marks.
 ### For example
 
 Apply mark-area.el to quickrun.el like below. 
+Convey mark point with `(mark-area-b)` and `(mark-area-e)`
 
 ```el
 (require 'quickrun) ;; https://github.com/syohex/emacs-quickrun
@@ -33,9 +34,8 @@ Apply mark-area.el to quickrun.el like below.
     (deactivate-mark)
     (quickrun :start (region-beginning) :end (region-end)))
    ;; M-x quickrun-mark-area-ad-hoc with specified area
-   ((and (overlay-start mark-area-beg-overlay)
-         (overlay-start mark-area-end-overlay))
-    (quickrun :start (overlay-start mark-area-beg-overlay)
-              :end (overlay-start mark-area-end-overlay)))
+   ((and (mark-area-b) (mark-area-e))
+    (quickrun :start (mark-area-b)
+              :end (mark-area-e)))
    (t (quickrun))))
 ```

@@ -32,8 +32,8 @@
 
 ;; Apply follow three functions to other elisp you want to use.
 ;; (mark-area-set-local-variable)
-;; (overlay-start mark-area-beg-overlay) ;; mark begging point
-;; (overlay-start mark-area-end-overlay) ;; mark end point
+;; (mark-area-b) ;; mark begging point
+;; (mark-area-e) ;; mark end point
 ;;
 ;; Example
 ;; [syohex/emacs-quickrun] https://github.com/syohex/emacs-quickrun
@@ -52,10 +52,9 @@
 ;;     (deactivate-mark)
 ;;     (quickrun :start (region-beginning) :end (region-end)))
 ;;    ;; M-x quickrun-ad-hoc with specified area
-;;    ((and (overlay-start mark-area-beg-overlay)
-;;          (overlay-start mark-area-end-overlay))
-;;     (quickrun :start (overlay-start mark-area-beg-overlay)
-;;               :end (overlay-start mark-area-end-overlay)))
+;;    ((and (mark-area-b) (mark-area-e))
+;;     (quickrun :start (mark-area-b)
+;;               :end (mark-area-e)))
 ;;    (t (quickrun))))
 
 ;;; Code:
@@ -84,9 +83,9 @@
 Work as buffer local function."
   (if (not (and (boundp 'mark-area-beg-overlay) mark-area-beg-overlay))
       ad-do-it
-    (cond ((eq (point) (overlay-start mark-area-beg-overlay))
+    (cond ((eq (point) (mark-area-b))
            (delete-overlay mark-area-beg-overlay))
-          ((eq (point) (overlay-start mark-area-end-overlay))
+          ((eq (point) (mark-area-e))
            (delete-overlay mark-area-end-overlay))
           (t ad-do-it))))
 
@@ -97,8 +96,8 @@ Work as buffer local function."
 If both exist, delete those mark."
   (mark-area-set-local-variable)
   (let (($p (point))
-        ($beg (overlay-start mark-area-beg-overlay))
-        ($end (overlay-start mark-area-end-overlay)))
+        ($beg (mark-area-b))
+        ($end (mark-area-e)))
     (cond
      ((and $beg $end)
       (mark-area-clear))
@@ -128,6 +127,28 @@ If both exist, delete those mark."
   (interactive)
   (delete-overlay mark-area-beg-overlay)
   (delete-overlay mark-area-end-overlay))
+
+(defun mark-area-goto-beginning ()
+  (interactive)
+  (let (($p (mark-area-b)))
+    (if $p
+        (goto-char $p)
+      (message "Beginning mark not found"))))
+
+(defun mark-area-goto-end ()
+  (interactive)
+  (let (($p (mark-area-e)))
+    (if $p
+        (goto-char $p)
+      (message "End mark not found"))))
+
+(defun mark-area-b () (interactive)
+  (overlay-start mark-area-beg-overlay))
+(defun mark-area-e () (interactive)
+  (overlay-start mark-area-end-overlay))
+(defun mark-area-cons () (interactive)
+  (cons (mark-area-b) (mark-area-e)))
+
 
 (provide 'mark-area)
 ;;; mark-area.el ends here
